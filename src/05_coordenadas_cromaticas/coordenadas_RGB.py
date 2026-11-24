@@ -38,13 +38,20 @@ def calcular_coordenadas(R, G, B, limiar=0.0):
 
     if not (R.shape == G.shape == B.shape):
         raise ValueError("Os canais RGB devem ter a mesma forma.")
+    if not np.isfinite(limiar) or limiar < 0:
+        raise ValueError("O limiar deve ser finito e >= 0.")
 
-    soma = R + G + B
+    with np.errstate(invalid="ignore", over="ignore"):
+        soma = R + G + B
 
     validos = (
         np.isfinite(R)
         & np.isfinite(G)
         & np.isfinite(B)
+        & np.isfinite(soma)
+        & (R >= 0)
+        & (G >= 0)
+        & (B >= 0)
         & (soma > limiar)
     )
 
@@ -58,6 +65,16 @@ def calcular_coordenadas(R, G, B, limiar=0.0):
     b[validos] = 1.0 - r[validos] - g[validos]
 
     return r, g, b, soma, validos
+
+
+def coordenadas_globais(R, G, soma, validos):
+    """Calcula as proporções a partir dos canais integrados na máscara."""
+    if not np.any(validos):
+        return np.nan, np.nan, np.nan
+    soma_total = np.sum(soma[validos])
+    r_global = np.sum(R[validos]) / soma_total
+    g_global = np.sum(G[validos]) / soma_total
+    return r_global, g_global, 1.0 - r_global - g_global
 
 
 def processar_laser(modo, limiar=0.0):
@@ -134,16 +151,7 @@ def processar_laser(modo, limiar=0.0):
         # r_global = soma(R) / soma(R + G + B)
         # g_global = soma(G) / soma(R + G + B)
 
-        if n_validos > 0:
-            soma_total = np.sum(soma[validos])
-
-            r_global = np.sum(R[validos]) / soma_total
-            g_global = np.sum(G[validos]) / soma_total
-            b_global = 1.0 - r_global - g_global
-        else:
-            r_global = np.nan
-            g_global = np.nan
-            b_global = np.nan
+        r_global, g_global, b_global = coordenadas_globais(R, G, soma, validos)
 
         registros.append({
             "laser": modo,
@@ -236,8 +244,8 @@ def main():
 
     args = parser.parse_args()
 
-    if args.limiar < 0:
-        parser.error("--limiar deve ser >= 0")
+    if not np.isfinite(args.limiar) or args.limiar < 0:
+        parser.error("--limiar deve ser finito e >= 0")
 
     modos = (
         ["azul", "verde"]

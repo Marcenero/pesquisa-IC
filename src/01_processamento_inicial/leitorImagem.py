@@ -1,9 +1,11 @@
+from pathlib import Path
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
 import re
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-cma_path = "Pulseiris03filtro09W000000.cma"
+cma_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.cma"
 
 #Abre o arquivo .cma em modo texto
 with open(cma_path, "r", encoding="ascii", errors="ignore") as f:
@@ -29,7 +31,7 @@ plt.colorbar()
 plt.title("Imagem CMA 1000 x 1000")
 plt.show()
 
-bmp_path = "Pulseiris03filtro09W000000.bmp"
+bmp_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.bmp"
 bmp = Image.open(bmp_path)
 
 #Pega a paleta do BMP
@@ -51,7 +53,8 @@ indices = (img_norm * idx_max).astype(np.uint8)
 img_rgb = palette[indices]
 
 #Salva a imagem colorida como .png
-Image.fromarray(img_rgb).save("cma_colorida_com_paleta_bmp.png")
+(RAIZ_PROJETO / "resultados/processamento_inicial").mkdir(parents=True, exist_ok=True)
+Image.fromarray(img_rgb).save(RAIZ_PROJETO / "resultados/processamento_inicial/cma_colorida_com_paleta_bmp.png")
 
 #Mostra a imagem .cma com a paleta de cores da imagem .bmp
 plt.imshow(img_rgb)

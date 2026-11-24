@@ -1,8 +1,10 @@
+from pathlib import Path
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-imagem = Image.open("imagens/Montagem/fotoCamera4.png").convert("RGB")
+imagem = Image.open(RAIZ_PROJETO / "dados/imagens_originais/Montagem/fotoCamera4.png").convert("RGB")
 
 pixels = np.array(imagem, dtype=np.float64)
 

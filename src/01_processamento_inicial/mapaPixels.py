@@ -1,7 +1,9 @@
+from pathlib import Path
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
 import cv2
 import matplotlib.pyplot as plt
 
-img = cv2.imread("imagens/Montagem/fotoCamera6.png")
+img = cv2.imread(str(RAIZ_PROJETO / "dados/imagens_originais/Montagem/fotoCamera6.png"))
 
 b, g, r = cv2.split(img)
 

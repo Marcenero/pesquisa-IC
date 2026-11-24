@@ -1,8 +1,10 @@
+from pathlib import Path
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
 import os
 from PIL import Image
 
-bmp_path = "Pulseiris03filtro09W000000.bmp"
-cma_path = "Pulseiris03filtro09W000000.cma"
+bmp_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.bmp"
+cma_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.cma"
 
 bmp = Image.open(bmp_path)
 largura, altura = bmp.size
@@ -28,8 +30,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-bmp_path = "Pulseiris03filtro09W000000.bmp"
-cma_path = "Pulseiris03filtro09W000000.cma"
+bmp_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.bmp"
+cma_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.cma"
 
 # Pega dimensões a partir do BMP
 largura, altura = Image.open(bmp_path).size

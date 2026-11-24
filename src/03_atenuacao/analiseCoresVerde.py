@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 RAIZ_PROJETO = Path(__file__).resolve().parents[2]
+(RAIZ_PROJETO / "resultados/atenuacao/verde").mkdir(parents=True, exist_ok=True)
 PASTA_IMAGENS = RAIZ_PROJETO / "dados/imagens_originais/camadasEscuraVerde"
 
 
@@ -270,7 +271,7 @@ print(df[colunas])
 # ---------------------------------------------------------
 
 df.to_csv(
-    RAIZ_PROJETO / "resultados/atenuacao/verde/resultados_intensidade.csv",
+    RAIZ_PROJETO / "resultados/atenuacao/verde/resultados_intensidade_basica.csv",
     index=False
 )
 

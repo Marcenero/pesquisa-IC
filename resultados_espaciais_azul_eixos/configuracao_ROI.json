@@ -1,0 +1,27 @@
+{
+  "modo": "azul",
+  "pasta": "imagens\\camadasEscuraUV",
+  "roi_laser": [
+    1044,
+    476,
+    173,
+    167
+  ],
+  "roi_fundo": [
+    234,
+    25,
+    1340,
+    154
+  ],
+  "centro_xy_px_original": [
+    1130.0,
+    559.0
+  ],
+  "angulo_eixo_maior_imagem_graus": null,
+  "mascara": "retangular sem mascara",
+  "convencao_eixos": "x horizontal, y vertical",
+  "n_pixels": 28891,
+  "modelo_intensidade": "I = max(RGB - media_RGB_fundo, 0) por pixel",
+  "unidades_x_y": "pixels",
+  "unidades_P": "nivel_digital*pixel^2"
+}

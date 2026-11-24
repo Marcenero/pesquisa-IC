@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Arquivos temporários
+.vscode/
+.ipynb_checkpoints/
+
+# Resultados gerados automaticamente
+# resultados_espaciais_azul_eixos/
+# resultados_espaciais_verde_eixos/
+
+# Segredos e configurações locais
+.env
+.env.*

@@ -1,0 +1,27 @@
+{
+  "modo": "verde",
+  "pasta": "imagens\\camadasEscuraVerde",
+  "roi_laser": [
+    943,
+    682,
+    142,
+    100
+  ],
+  "roi_fundo": [
+    390,
+    84,
+    1215,
+    209
+  ],
+  "centro_xy_px_original": [
+    1013.6627426147461,
+    729.7815933227539
+  ],
+  "angulo_eixo_maior_imagem_graus": 161.59634399414062,
+  "mascara": "eliptica",
+  "convencao_eixos": "x' no eixo MAIOR, y' no MENOR",
+  "n_pixels": 24319,
+  "modelo_intensidade": "I = max(RGB - media_RGB_fundo, 0) por pixel",
+  "unidades_x_y": "pixels",
+  "unidades_P": "nivel_digital*pixel^2"
+}

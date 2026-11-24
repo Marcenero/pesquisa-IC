@@ -1,10 +1,12 @@
+from pathlib import Path
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
 import re
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
 #1) Ler o arquivo .cma
-cma_path = "Pulseiris03filtro09W000000.cma"
+cma_path = RAIZ_PROJETO / "dados/imagens_originais/Pulseiris03filtro09W000000.cma"
 
 #Abrir o arquivo .cma como texto
 with open(cma_path, "r", encoding="ascii", errors="ignore") as f:
@@ -157,8 +159,9 @@ resultado = np.column_stack([
     diametro_1e2
 ])
 
+(RAIZ_PROJETO / "resultados/caracterizacao_feixe").mkdir(parents=True, exist_ok=True)
 np.savetxt(
-    "diametro_feixe_por_z.csv",
+    RAIZ_PROJETO / "resultados/caracterizacao_feixe/diametro_feixe_por_z.csv",
     resultado,
     delimiter=",",
     header="z_pixel,y0_pixel,sigma_pixel,diametro_fwhm_pixel,diametro_1e2_pixel",

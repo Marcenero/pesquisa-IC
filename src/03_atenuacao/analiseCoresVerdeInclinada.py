@@ -33,6 +33,7 @@ import pandas as pd
 
 
 RAIZ_PROJETO = Path(__file__).resolve().parents[2]
+(RAIZ_PROJETO / "resultados/atenuacao/verde").mkdir(parents=True, exist_ok=True)
 PASTA_IMAGENS = RAIZ_PROJETO / "dados/imagens_originais/camadasEscuraVerde"
 
 LARGURA_MAX = 1000
@@ -347,7 +348,7 @@ def main():
 
     )  # azul
 
-    cv2.imwrite("validacao_roi_inclinada.png", verificacao)
+    cv2.imwrite(str(RAIZ_PROJETO / "resultados/atenuacao/verde/validacao_roi_inclinada.png"), verificacao)
 
     cv2.imshow(
 
@@ -369,7 +370,7 @@ def main():
 
     vertical = rotacionar_para_visualizacao(referencia_bgr, angulo_vertical)
 
-    cv2.imwrite("laser_vertical_visualizacao.png", vertical)
+    cv2.imwrite(str(RAIZ_PROJETO / "resultados/atenuacao/verde/laser_vertical_visualizacao.png"), vertical)
 
 
 
@@ -485,7 +486,7 @@ def main():
 
     print("\n", df[colunas].to_string(index=False))
 
-    df.to_csv(RAIZ_PROJETO / "resultados/atenuacao/verde/resultados_intensidade.csv", index=False)
+    df.to_csv(RAIZ_PROJETO / "resultados/atenuacao/verde/resultados_intensidade_inclinada.csv", index=False)
 
 
 

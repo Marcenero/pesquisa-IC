@@ -7,7 +7,7 @@ Exemplos:
     python validar_etapa3_npz.py --modo verde
     python validar_etapa3_npz.py --modo ambos
 
-Resultados em resultados_espaciais_<modo>_eixos/validacao_etapa3/.
+Resultados em resultados/analise_espacial/<modo>/validacao_etapa3/.
 Requer: numpy, pandas, matplotlib.
 """
 from __future__ import annotations
@@ -106,7 +106,7 @@ def gerar_perfil(arquivos: list[tuple[Path, dict]], eixo: str, canal: str,
 
 
 def processar(modo: str, pasta_raiz: Path | None, bin_px: float) -> None:
-    raiz = pasta_raiz if pasta_raiz else Path(f"resultados_espaciais_{modo}_eixos")
+    raiz = pasta_raiz if pasta_raiz else Path(__file__).resolve().parents[2] / "resultados" / "analise_espacial" / modo / f"resultados_espaciais_{modo}_eixos"
     pasta_npz = raiz / "dados_I_xy"
     csv_original = raiz / "momentos_por_imagem_e_canal.csv"
     saida = raiz / "validacao_etapa3"

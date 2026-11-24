@@ -32,7 +32,8 @@ import pandas as pd
 
 
 
-PASTA_IMAGENS = Path("imagens/camadasEscuraVerde")
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
+PASTA_IMAGENS = RAIZ_PROJETO / "dados/imagens_originais/camadasEscuraVerde"
 
 LARGURA_MAX = 1000
 
@@ -484,7 +485,7 @@ def main():
 
     print("\n", df[colunas].to_string(index=False))
 
-    df.to_csv("resultados_intensidade.csv", index=False)
+    df.to_csv(RAIZ_PROJETO / "resultados/atenuacao/verde/resultados_intensidade.csv", index=False)
 
 
 
@@ -589,7 +590,7 @@ def main():
             "k_por_folha": k_g,
             "R2_intensidade": r2,
             "n_pontos_ajuste": len(x),
-        }]).to_csv("coeficiente_atenuacao_verde.csv", index=False)
+        }]).to_csv(RAIZ_PROJETO / "resultados/atenuacao/verde/coeficiente_atenuacao_verde.csv", index=False)
 
         # Curva teorica + dados experimentais
         n_modelo = np.linspace(camadas.min(), camadas.max(), 200)
@@ -610,7 +611,7 @@ def main():
         plt.legend()
         plt.grid(alpha=0.3)
         plt.tight_layout()
-        plt.savefig("ajuste_exponencial_verde.png", dpi=300)
+        plt.savefig(RAIZ_PROJETO / "resultados/atenuacao/verde/ajuste_exponencial_verde.png", dpi=300)
         plt.show()
 
 

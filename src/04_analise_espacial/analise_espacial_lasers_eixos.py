@@ -30,8 +30,8 @@ import numpy as np
 import pandas as pd
 
 PASTAS_PADRAO = {
-    "azul": Path("imagens/camadasEscuraUV"),
-    "verde": Path("imagens/camadasEscuraVerde"),
+    "azul": Path(__file__).resolve().parents[2] / "dados/imagens_originais/camadasEscuraUV",
+    "verde": Path(__file__).resolve().parents[2] / "dados/imagens_originais/camadasEscuraVerde",
 }
 CORES = {"R": "red", "G": "green", "B": "blue"}
 MAPAS_CORES = {"R": "Reds", "G": "Greens", "B": "Blues"}
@@ -382,7 +382,7 @@ def main():
     args = parser.parse_args()
 
     pasta = args.pasta or PASTAS_PADRAO[args.modo]
-    saida = args.saida or Path(f"resultados_espaciais_{args.modo}_eixos")
+    saida = args.saida or (Path(__file__).resolve().parents[2] / "resultados/analise_espacial" / args.modo / f"resultados_espaciais_{args.modo}_eixos")
     saida.mkdir(parents=True, exist_ok=True)
     pasta_mapas = saida / "mapas_xy"
     pasta_mapas.mkdir(exist_ok=True)

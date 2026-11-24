@@ -8,6 +8,7 @@ Repositório de trabalho semestral para processamento de imagens, caracterizaç�
 - `src/02_caracterizacao_feixe/`: scripts e versões comentadas para estimar o diâmetro do feixe.
 - `src/03_atenuacao/`: análises RGB e coeficiente efetivo de atenuação.
 - `src/04_analise_espacial/`: momentos, centroides, deltas e validação dos NPZ.
+- `src/05_coordenadas_cromaticas/`: coordenadas RGB normalizadas, testes numéricos e análise de sensibilidade ao limiar.
 - `dados/imagens_originais/`: imagens de entrada e arquivos experimentais originais.
 - `resultados/`: tabelas e gráficos preservados, separados por etapa e por cor.
 - `docs/metodologia/`: notas sobre execução e estado de validação.
@@ -29,6 +30,22 @@ python src/04_analise_espacial/validar_etapa3_npz.py --modo ambos
 ```
 
 A validação recalcula momentos a partir dos NPZ e compara com CSVs existentes. Resultados gerados ficam em `resultados/analise_espacial/<cor>/resultados_espaciais_<cor>_eixos/validacao_etapa3/`.
+
+## Etapa 5 — coordenadas RGB normalizadas
+
+A etapa compara as contribuições relativas dos canais dos lasers azul e verde. Para cada pixel com `S = R + G + B` acima do limiar, calcula `r = R/S`, `g = G/S` e `b = 1 - r - g`. As coordenadas globais usam os canais integrados sobre os pixels válidos (por exemplo, `r_global = ΣR/ΣS`), o que dá mais peso aos pixels intensos que a média simples das coordenadas por pixel.
+
+As entradas são os NPZ `dados_I_xy/I_xy_*.npz` da etapa 4, em `resultados/analise_espacial/<cor>/resultados_espaciais_<cor>_eixos/`. O programa original gera NPZ por imagem, um CSV por laser e um gráfico por laser em `resultados/coordenadas_cromaticas/<cor>/`. Execute o primeiro comando somente em uma cópia de trabalho se quiser preservar os arquivos históricos nesses destinos.
+
+```bash
+python src/05_coordenadas_cromaticas/coordenadas_RGB.py --modo ambos --limiar 0
+python -m unittest discover -s src/05_coordenadas_cromaticas -v
+python src/05_coordenadas_cromaticas/analisar_sensibilidade.py
+```
+
+Os testes conferem normalização, faixa, entradas inválidas e concordância no limiar zero com os valores integrados da etapa 4. A análise exploratória grava um CSV e dois gráficos em `resultados/coordenadas_cromaticas/analise_sensibilidade/`. Para repetir a geração, use uma cópia de trabalho com essa pasta de saída vazia.
+
+Os canais são intensidades digitais RGB corrigidas pelo fundo, com valores negativos truncados para zero na etapa 4. Ruído, saturação e resposta da câmera afetam as proporções. Esses resultados não são medições espectrais calibradas nem coordenadas CIE. Os limiares avaliados são exploratórios.
 
 ## Estado científico
 

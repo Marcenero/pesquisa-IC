@@ -6,7 +6,8 @@ import re
 from pathlib import Path
 
 
-PASTA_IMAGENS = Path("imagens/camadasEscuraVerde")
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
+PASTA_IMAGENS = RAIZ_PROJETO / "dados/imagens_originais/camadasEscuraVerde"
 
 
 def numero_camadas(nome):
@@ -269,7 +270,7 @@ print(df[colunas])
 # ---------------------------------------------------------
 
 df.to_csv(
-    "resultados_intensidade.csv",
+    RAIZ_PROJETO / "resultados/atenuacao/verde/resultados_intensidade.csv",
     index=False
 )
 

@@ -11,7 +11,8 @@ from pathlib import Path
 # CONFIGURAÇÕES - LASER AZUL
 # ---------------------------------------------------------
 
-PASTA_IMAGENS = Path("imagens/camadasEscuraUV")
+RAIZ_PROJETO = Path(__file__).resolve().parents[2]
+PASTA_IMAGENS = RAIZ_PROJETO / "dados/imagens_originais/camadasEscuraUV"
 
 LARGURA_MAX = 1000
 ALTURA_MAX = 650
@@ -315,7 +316,7 @@ print(df[colunas].to_string(index=False))
 # ---------------------------------------------------------
 
 df.to_csv(
-    "resultados_intensidade_azul.csv",
+    RAIZ_PROJETO / "resultados/atenuacao/azul/resultados_intensidade_azul.csv",
     index=False
 )
 
@@ -390,7 +391,7 @@ plt.grid(alpha=0.3)
 plt.tight_layout()
 
 plt.savefig(
-    "decaimento_laser_azul.png",
+        RAIZ_PROJETO / "resultados/atenuacao/azul/decaimento_laser_azul.png",
     dpi=300
 )
 
@@ -481,7 +482,7 @@ else:
     plt.tight_layout()
 
     plt.savefig(
-        "coeficiente_atenuacao_azul.png",
+        RAIZ_PROJETO / "resultados/atenuacao/azul/coeficiente_atenuacao_azul.png",
         dpi=300
     )
 

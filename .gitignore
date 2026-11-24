@@ -1,17 +1,15 @@
-# Python
+﻿# Python
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
 
-# Arquivos temporários
+# Editor e temporários
 .vscode/
 .ipynb_checkpoints/
+*.tmp
+*.log
 
-# Resultados gerados automaticamente
-# resultados_espaciais_azul_eixos/
-# resultados_espaciais_verde_eixos/
-
-# Segredos e configurações locais
+# Segredos locais
 .env
 .env.*
